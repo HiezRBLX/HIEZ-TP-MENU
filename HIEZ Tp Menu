@@ -1,0 +1,59 @@
+-- Create GUI elements
+local gui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local textBox = Instance.new("TextBox")
+local teleportButton = Instance.new("TextButton")
+
+-- Configure GUI properties
+gui.Name = "HIEZ_Tp_Gui"
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+frame.Name = "MainFrame"
+frame.Parent = gui
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.BorderSizePixel = 0
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+
+textBox.Name = "UsernameTextBox"
+textBox.Parent = frame
+textBox.BackgroundColor3 = Color3.new(1, 1, 1)
+textBox.BorderSizePixel = 0
+textBox.Size = UDim2.new(0.8, 0, 0.3, 0)
+textBox.Position = UDim2.new(0.1, 0, 0.2, 0)
+textBox.PlaceholderText = "Enter username..."
+
+teleportButton.Name = "TeleportButton"
+teleportButton.Parent = frame
+teleportButton.BackgroundColor3 = Color3.new(0, 0, 1)
+teleportButton.BorderSizePixel = 0
+teleportButton.Size = UDim2.new(0.8, 0, 0.3, 0)
+teleportButton.Position = UDim2.new(0.1, 0, 0.6, 0)
+teleportButton.Text = "Teleport"
+teleportButton.TextColor3 = Color3.new(1, 1, 1)
+teleportButton.MouseButton1Click:Connect(function()
+    local username = textBox.Text
+    local player = game.Players:FindFirstChild(username)
+    if player then
+        game.Players.LocalPlayer.Character:MoveTo(player.Character.HumanoidRootPart.Position)
+    else
+        print("Player not found.")
+    end
+end)
+
+-- Label for title
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "TitleLabel"
+titleLabel.Parent = frame
+titleLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Size = UDim2.new(1, 0, 0.2, 0)
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.TextSize = 18
+titleLabel.Text = "HIEZ Tp Gui"
+
+-- Make GUI draggable
+frame.Active = true
+frame.Draggable = true
